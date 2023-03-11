@@ -1,0 +1,5 @@
+loguru
+influxdb_client
+fastapi
+pydantic
+redis
