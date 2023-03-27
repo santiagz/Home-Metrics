@@ -6,7 +6,6 @@ datasources:
   url: postgres:9999
   access: proxy
   user: adminikunikus
-  password: WVNufdM4bgqkq5LChYgqr8h
   database: postgres
   basicAuth: false
   isDefault: true
@@ -14,6 +13,8 @@ datasources:
      sslmode: disable
   version: 1
   editable: true
+  secureJsonData:
+    password: WVNufdM4bgqkq5LChYgqr8h
 
 - name: InfluxDB
   type: influxdb
