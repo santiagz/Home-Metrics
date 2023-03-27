@@ -50,7 +50,7 @@ services:
             driver: none
 
     redis:
-        container_name: redismod
+        container_name: redis
         image: redis
         command: >
             --requirepass ${REDIS_PASS}
@@ -68,7 +68,7 @@ services:
         links:
             - postgres
             - influxdb
-            - redismod
+            - redis
         environment:
             GF_SECURITY_ADMIN_USER: ${GRAFANA_USER}
             GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASS}
