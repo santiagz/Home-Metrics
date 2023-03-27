@@ -35,7 +35,7 @@ services:
         volumes:
             - influxdb-storage:/var/lib/influxdb
         environment:
-            - INFLUXDB_DB=db0
+            - INFLUXDB_DB=main
             - INFLUXDB_ADMIN_USER=${INFLUXDB_USER}
             - INFLUXDB_ADMIN_PASSWORD=${INFLUXDB_PASSWORD}
 
@@ -73,7 +73,7 @@ services:
         environment:
             GF_SECURITY_ADMIN_USER: ${GRAFANA_USER}
             GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASS}
-            GF_INSTALL_PLUGINS: grafana-clock-panel,grafana-simple-json-datasource
+            GF_INSTALL_PLUGINS: "grafana-clock-panel,grafana-simple-json-datasource,redis-datasource"
 
 
 volumes:

@@ -18,9 +18,25 @@ datasources:
 - name: InfluxDB
   type: influxdb
   access: proxy
-  database: db0
+  database: main
   user: adminikunikus
   password: KaF7P5YTDE8jnnVQ8gnZcWd
   url: http://influxdb:8086
   isDefault: false
   editable: true
+
+- name: Redis
+  type: redis-datasource
+  access: proxy
+  isDefault: false
+  version: 1
+  url: redis:6379
+  jsonData:
+    client: standalone
+    poolSize: 5
+    timeout: 10
+    pingInterval: 0
+    pipelineWindow: 0
+  editable: true
+  secureJsonData:
+    password: 38RNeV5qAYhm7yazuRKknqb
