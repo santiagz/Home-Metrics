@@ -7,7 +7,7 @@ datasources:
   access: proxy
   user: adminikunikus
   password: WVNufdM4bgqkq5LChYgqr8h
-  database: home-metrics
+  database: postgres
   basicAuth: false
   isDefault: true
   jsonData:
