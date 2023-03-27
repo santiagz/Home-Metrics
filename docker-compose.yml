@@ -65,10 +65,10 @@ services:
         ports:
             - '127.0.0.1:3000:3000'
         volumes:
-            - grafana-storage:/var/lib/grafana
             - ./grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
             - ./grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/main.yaml
             - ./grafana/dashboards:/var/lib/grafana/dashboards
+            - grafana-storage:/var/lib/grafana
 
             - ./grafana/home-metrics.json:/var/lib/grafana/dashboards/home-metrics.json
         links:
