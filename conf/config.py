@@ -46,7 +46,7 @@ class LoadConfig(object):
             ),
             influx=InfluxConfig(
                 host=self.env.str('INFLX_HOST'),
-                key=self.env.str('INFLX_KEY')
+                key=self.env.str('DOCKER_INFLUXDB_INIT_ADMIN_TOKEN')
             ),
             db=Database(
                 host=self.env.str('DB_HOST'),

@@ -33,10 +33,9 @@ services:
         volumes:
             - influxdb-lib:/var/lib/influxdb2
         env_file:
-            # BE SURE TO CHANGE THIS LINE BEFORE GOING TO PRODUCTION
             - ./.env
-        ports:
-            - 8086:8086
+        expose:
+            - "8086"
         restart: always
         privileged: true
 
@@ -67,7 +66,7 @@ services:
         volumes:
             - ./grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
             - ./grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/main.yaml
-            - ./grafana/dashboards:/var/lib/grafana/dashboards
+#            - ./grafana/dashboards:/var/lib/grafana/dashboards
             - ./grafana/home-metrics.json:/var/lib/grafana/dashboards/home-metrics.json
             - grafana-storage:/var/lib/grafana
         links:
@@ -78,7 +77,6 @@ services:
             GF_SECURITY_ADMIN_USER: ${GRAFANA_USER}
             GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASS}
             GF_INSTALL_PLUGINS: "grafana-clock-panel,grafana-simple-json-datasource,redis-datasource"
-            GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: "/var/lib/grafana/dashboards/home-metrics.json"
 
 
 volumes:
