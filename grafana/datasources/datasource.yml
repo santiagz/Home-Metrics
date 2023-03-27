@@ -18,12 +18,14 @@ datasources:
 - name: InfluxDB
   type: influxdb
   access: proxy
-  database: main
-  user: adminikunikus
-  password: KaF7P5YTDE8jnnVQ8gnZcWd
   url: http://influxdb:8086
-  isDefault: false
-  editable: true
+  jsonData:
+    version: Flux
+    organization: home-metrics
+    defaultBucket: main
+    tlsSkipVerify: true
+  secureJsonData:
+    token: KVgt7GLkE7mydG3PW4AaEdR2YnecvpWjmnScgDHD7425oJsKEyfR7q
 
 - name: Redis
   type: redis-datasource
