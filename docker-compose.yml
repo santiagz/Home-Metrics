@@ -67,7 +67,7 @@ services:
         volumes:
             - grafana-storage:/var/lib/grafana
             - ./grafana/:/etc/grafana/provisioning
-            - ./grafana/home-metrics.json /var/lib/grafana/dashboards/home-metrics.json
+            - ./grafana/home-metrics.json:/var/lib/grafana/dashboards/home-metrics.json
         links:
             - postgres
             - influxdb
