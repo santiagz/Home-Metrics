@@ -79,6 +79,7 @@ services:
             GF_SECURITY_ADMIN_USER: ${GRAFANA_USER}
             GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASS}
             GF_INSTALL_PLUGINS: "grafana-clock-panel,grafana-simple-json-datasource,redis-datasource"
+            GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: "/etc/grafana/provisioning/dashboards/main.yaml"
 
 
 volumes:
