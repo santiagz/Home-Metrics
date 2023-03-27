@@ -1,0 +1,83 @@
+version: '3'
+
+services:
+    http-server:
+        build: .
+        container_name: rmqtt-http-server
+        command: uvicorn api:app --host 0.0.0.0 --port 80 --reload
+        volumes:
+            # FOR DEVELOPING
+            # - .:/home
+            - /etc/localtime:/etc/localtime
+
+    rmqtt1:
+        container_name: rmqtt-node1
+        image: rmqtt/rmqtt:latest
+        environment:
+            - TZ=Europe/Kiev
+        volumes:
+            - /var/rmqtt_data/etc:/app/rmqtt/etc
+            - /var/rmqtt_data/log/1:/var/log/rmqtt
+        ports:
+            - "1883:1883"
+            # - "8883:8883"
+            # - "11883:11883"
+            # - "6060:6060"
+        restart: always
+        command: -f /app/rmqtt/etc/rmqtt.toml --id 1
+
+    influxdb:
+        image: influxdb:latest
+        container_name: influxdb
+        expose:
+            - "8086"
+        volumes:
+            - influxdb-storage:/var/lib/influxdb
+        environment:
+            - INFLUXDB_DB=db0
+            - INFLUXDB_ADMIN_USER=${INFLUXDB_USER}
+            - INFLUXDB_ADMIN_PASSWORD=${INFLUXDB_PASSWORD}
+
+    postgres:
+        image: postgres:latest
+        container_name: postgres
+        restart: always
+        command: -p 9999
+        environment:
+            POSTGRES_USER: ${DB_USER}
+            POSTGRES_PASSWORD: ${DB_PASS}
+        logging:
+            driver: none
+
+    redis:
+        container_name: redismod
+        image: redis
+        command: >
+            --requirepass ${REDIS_PASS}
+        expose:
+            - "6379"
+
+    grafana:
+        image: grafana/grafana:latest
+        container_name: grafana
+        ports:
+            - '127.0.0.1:3000:3000'
+        volumes:
+            - grafana-storage:/var/lib/grafana
+            - ./grafana/:/etc/grafana/provisioning
+        links:
+            - postgres
+            - influxdb
+            - redismod
+        environment:
+            GF_SECURITY_ADMIN_USER: ${GRAFANA_USER}
+            GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASS}
+            GF_INSTALL_PLUGINS: grafana-clock-panel,grafana-simple-json-datasource
+
+
+volumes:
+    influxdb-storage:
+    chronograf-storage:
+    grafana-storage:
+
+

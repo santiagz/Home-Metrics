@@ -1,0 +1,26 @@
+apiVersion: 1
+
+datasources:
+- name: PSG
+  type: postgres
+  url: postgres:9999
+  access: proxy
+  user: adminikunikus
+  password: WVNufdM4bgqkq5LChYgqr8h
+  database: home-metrics
+  basicAuth: false
+  isDefault: true
+  jsonData:
+     sslmode: disable
+  version: 1
+  editable: true
+
+- name: InfluxDB
+  type: influxdb
+  access: proxy
+  database: db0
+  user: adminikunikus
+  password: KaF7P5YTDE8jnnVQ8gnZcWd
+  url: http://influxdb:8086
+  isDefault: true
+  editable: true

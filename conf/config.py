@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-# from data.vault import ENV  # TODO: Change for Redis or smth else
+from environs import Env
 
 
 @dataclass
@@ -33,25 +33,29 @@ class Config:
 
 class LoadConfig(object):
     def __init__(self):
-        self.env = ENV.get_secrets()
+        self.env = Env()
+        self.env.read_env('../.env')
 
     @property
     def config(self):
         return Config(
             redis=RedisConfig(
-                host=self.env['redis_host'],
-                port=self.env['redis_port'],
-                passwd=self.env['redis_pass']
+                host=self.env.str('REDIS_HOST'),
+                port=self.env.int('REDIS_PORT'),
+                passwd=self.env.str('REDIS_PASS')
             ),
             influx=InfluxConfig(
-                host=self.env['inflx_host'],
-                key=self.env['inflx_key']
+                host=self.env.str('INFLX_HOST'),
+                key=self.env.str('INFLX_KEY')
             ),
             db=Database(
-                host=self.env['db_api_host'],
-                port=self.env['db_api_port'],
-                user=self.env['db_api_user'],
-                passwd=self.env['db_api_pass'],
-                database=self.env['db_api_database']
+                host=self.env.str('DB_HOST'),
+                port=self.env.str('DB_PORT'),
+                user=self.env.str('DB_USER'),
+                passwd=self.env.str('DB_PASS'),
+                database=self.env.str('DB_DATABASE')
             )
         )
+
+
+config = LoadConfig().config

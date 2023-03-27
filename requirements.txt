@@ -3,3 +3,4 @@ influxdb_client
 fastapi
 pydantic
 redis
+environs
