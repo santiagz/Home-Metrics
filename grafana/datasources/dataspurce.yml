@@ -22,5 +22,5 @@ datasources:
   user: adminikunikus
   password: KaF7P5YTDE8jnnVQ8gnZcWd
   url: http://influxdb:8086
-  isDefault: true
+  isDefault: false
   editable: true
